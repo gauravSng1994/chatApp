@@ -48,9 +48,36 @@
         ul {
             width: 90%;
             margin: 5%;
+            list-style-type: none;
+            padding: 10px 0;
+            text-align: -webkit-right;
         }
         ul li{
-
+            background-color: #f69c3a;
+            max-width: 35%;
+            display: flex;
+            flex-direction: row;
+            padding: 8px 12px;
+            margin: 5px 5px 0;
+            border-radius: 8px 0 8px 8px;
+            position: relative;
+        }
+        ul li:after{
+            position: absolute;
+            content: "";
+            color: #f69c3a;
+            background-color: #f69c3a;
+            right: -10px;
+            top:0px;
+            width: 10px;
+            height: 10px;
+            border-radius: 0 0 20px 0;
+        }
+        ul li div.messageTimeStamp{
+            position: absolute;
+            right: 10px;
+            bottom: 5px;
+            font-size: 0.82em;
         }
         div.typingBox{
             position: fixed;
@@ -102,10 +129,7 @@
         <div class="bottomBackgroundStrip"></div>
         <section>
             <div class="messageBox">
-                <ul id="messages" class="message-list received-message">
-                    <li>Hello</li>
-                    <li>Kya hal hai?</li>
-                </ul>
+                <ul id="messages" class="message-list received-message"></ul>
             </div>
             <div class="typingBox">
                 <form onsubmit="submitMessage(event)">
@@ -128,9 +152,39 @@
 <script>
     let chatHistory = [
         {message: "Hello!", timeStamp: new Date('Thu May 07 2020 01:32:23 GMT+0530 (India Standard Time)')},
-        {message: "Oh my God!!", timeStamp: new Date('Thu May 07 2020 01:32:36 GMT+0530 (India Standard Time)')},
-        {message: "You are so hot.", timeStamp: new Date('Thu May 07 2020 01:32:45 GMT+0530 (India Standard Time)')}
+        {message: "How are you?", timeStamp: new Date('Thu May 07 2020 01:32:36 GMT+0530 (India Standard Time)')},
+        {message: "I am fine.", timeStamp: new Date('Thu May 07 2020 01:32:45 GMT+0530 (India Standard Time)')}
     ];
+    window.onload=()=>{
+        setMessages();
+    };
+    function setMessages(){
+        let ul = document.getElementById('messages');
+        ul.innerText = '';
+        chatHistory.map(chat=>{
+            let chatDate = new Date(chat.timeStamp);
+            let formattedDate = chatDate.getDay()+'/'+(chatDate.getMonth()+1)+"/"+chatDate.getFullYear() + " "+chatDate.getHours()+':'+chatDate.getMinutes() ;
+            let li = createElement("li",{'class':'messageLiElement'})
+            let div1 = createElement("div",{class: 'messageContent'});
+            let textNode1 = document.createTextNode(chat.message);
+            div1.appendChild(textNode1);
+            let div2 = createElement("div",{class: 'messageTimeStamp'});
+            let textNode2 = document.createTextNode(formattedDate);
+            div2.appendChild(textNode2);
+            li.appendChild(div1);
+            li.appendChild(div2);
+            ul.appendChild(li);
+        })
+    }
+    function createElement(element,attributes={}){
+        let el = document.createElement(element);
+        for(let attr in attributes){
+            let tempAttr = document.createAttribute(attr);
+            tempAttr.value = attributes[attr];
+            el.setAttributeNode(tempAttr);
+        }
+        return el;
+    }
     function submitMessage(event){
         event.preventDefault();
         let contentWriter = document.getElementById('contentWriter');
@@ -139,7 +193,8 @@
         contentWriter.innerText= '';
         boom();
         chatHistory.push({message,timeStamp});
-        console.log(chatHistory);
+        // console.log(chatHistory);
+        setMessages();
     }
     function boom(){
         let message = document.getElementById('contentWriter').innerHTML;
