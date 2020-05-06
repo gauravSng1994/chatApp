@@ -108,7 +108,7 @@
                 </ul>
             </div>
             <div class="typingBox">
-                <form onsubmit="">
+                <form onsubmit="submitMessage(event)">
                     <div class="contentWriterPlaceHolder" id="contentWriterPlaceHolder">Type a message</div>
                     <div id="contentWriter" onkeyup="boom()" tabindex="0" contenteditable="true" autofocus class="contentWriter"></div>
                     <button type="submit">Send</button>
@@ -126,6 +126,17 @@
 </html>
 
 <script>
+    let chatHistory = [];
+    function submitMessage(event){
+        event.preventDefault();
+        let contentWriter = document.getElementById('contentWriter');
+        let message = contentWriter.innerHTML;
+        let timeStamp = new Date();
+        contentWriter.innerText= '';
+        boom();
+        chatHistory.push({message,timeStamp});
+        console.log(chatHistory);
+    }
     function boom(){
         let message = document.getElementById('contentWriter').innerHTML;
         if(!message.trim()) document.getElementById('contentWriterPlaceHolder').style.setProperty('visibility','visible');
