@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+        form{
+            display: flex;
+            flex-direction: row;
+            height: 50px;
+            padding: 10px 0;
+            position: relative;
+        }
+
+        div .contentWriter{
+            background-color: white;
+            border-radius: 30px;
+            width: 65%;
+            padding: 15px 2%;
+            margin: 0 0 0 5%;
+            font-size: 20px;
+        }
+        div .contentWriter:focus{
+            outline:0;
+        }
+        div .contentWriterPlaceHolder{
+            color: #999;
+            position: absolute;
+            left: 7%;
+            top:33%;
+            visibility: visible;
+            font-size: 20px;
+        }
+        form input{
+            width: 65%;
+            padding: 0 10px;
+            margin: 0 0 0 5%;
+            font-size: 20px;
+        }
+        form button{
+            width: 20%;
+            margin: 0 2.5% ;
+            color: rgba(255, 255, 255, 0.76);
+            background-color: #f69c3a;
+            font-size: 20px;
+        }
+        ul {
+            width: 90%;
+            margin: 5%;
+        }
+        ul li{
+
+        }
+        div.typingBox{
+            position: fixed;
+            width: 90%;
+            margin: auto;
+            bottom: 5%;
+        }
+        div.main{
+            height: 98%;
+            width: 100%;
+            position: absolute;
+        }
+        div.topBackgroundStrip{
+            position: fixed;
+            top: 0;
+            height: 20%;
+            width: 100%;
+            background-color: #FF9933;
+            /*background-color: #ee8a0d;*/
+            z-index: -500;
+        }
+        div.bottomBackgroundStrip{
+            position: fixed;
+            bottom: 0;
+            height: 50%;
+            width: 100%;
+            background-color: #138808;
+            z-index: -500;
+        }
+        section {
+            background-color: #cdcccc;
+            width: 90%;
+            position: fixed;
+            top: 5%;
+            height: 92%;
+            margin: 0 5%;
+        }
+        div .messageBox{
+            background-color: #eeeeee;
+            width: 90%;
+            margin: auto;
+            height: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="topBackgroundStrip"></div>
+        <div class="bottomBackgroundStrip"></div>
+        <section>
+            <div class="messageBox">
+                <ul id="messages" class="message-list received-message">
+                    <li>Hello</li>
+                    <li>Kya hal hai?</li>
+                </ul>
+            </div>
+            <div class="typingBox">
+                <form onsubmit="">
+                    <div class="contentWriterPlaceHolder" id="contentWriterPlaceHolder">Type a message</div>
+                    <div id="contentWriter" onkeyup="boom()" tabindex="0" contenteditable="true" autofocus class="contentWriter"></div>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </section>
+    </div>
+<script src="./socket.io/socket.io.js"></script>
+<!--<script src="./node_modules/socket.io-client/dist/socket.io.js"></script>-->
+<script>
+    // var socket = io();
+    // console.log(socket);
+</script>
+</body>
+</html>
+
+<script>
+    function boom(){
+        let message = document.getElementById('contentWriter').innerHTML;
+        if(!message.trim()) document.getElementById('contentWriterPlaceHolder').style.setProperty('visibility','visible');
+        else document.getElementById('contentWriterPlaceHolder').style.setProperty('visibility','hidden');
+    }
+</script>
