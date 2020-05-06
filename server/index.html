@@ -126,7 +126,11 @@
 </html>
 
 <script>
-    let chatHistory = [];
+    let chatHistory = [
+        {message: "Hello!", timeStamp: new Date('Thu May 07 2020 01:32:23 GMT+0530 (India Standard Time)')},
+        {message: "Oh my God!!", timeStamp: new Date('Thu May 07 2020 01:32:36 GMT+0530 (India Standard Time)')},
+        {message: "You are so hot.", timeStamp: new Date('Thu May 07 2020 01:32:45 GMT+0530 (India Standard Time)')}
+    ];
     function submitMessage(event){
         event.preventDefault();
         let contentWriter = document.getElementById('contentWriter');
