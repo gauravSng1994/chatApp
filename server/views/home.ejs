@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="/assets/home.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div class="main">
+    <div class="topBackgroundStrip"></div>
+    <div class="bottomBackgroundStrip"></div>
+    <section>
+        <div class="messageBox">
+            <ul id="messages" class="message-list received-message"></ul>
+        </div>
+        <div class="typingBox">
+            <form onsubmit="submitMessage(event)">
+                <div class="contentWriterPlaceHolder" id="contentWriterPlaceHolder">Type a message</div>
+                <div id="contentWriter" onkeyup="boom()" tabindex="0" contenteditable="true" autofocus class="contentWriter"></div>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+    </section>
+</div>
+<script src="./socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    console.log(socket);
+</script>
+</body>
+</html>
+
+<script>
+    let chatHistory = [
+        {message: "Hello!", timeStamp: new Date('Thu May 07 2020 01:32:23 GMT+0530 (India Standard Time)')},
+        {message: "How are you?", timeStamp: new Date('Thu May 07 2020 01:32:36 GMT+0530 (India Standard Time)')},
+        {message: "I am fine.", timeStamp: new Date('Thu May 07 2020 01:32:45 GMT+0530 (India Standard Time)')}
+    ];
+    window.onload=()=>{
+        setMessages();
+    };
+    function setMessages(){
+        let ul = document.getElementById('messages');
+        ul.innerText = '';
+        chatHistory.map(chat=>{
+            let chatDate = new Date(chat.timeStamp);
+            let formattedDate = chatDate.getDay()+'/'+(chatDate.getMonth()+1)+"/"+chatDate.getFullYear() + " "+chatDate.getHours()+':'+chatDate.getMinutes() ;
+            let li = createElement("li",{'class':'messageLiElement'})
+            let div1 = createElement("div",{class: 'messageContent'});
+            let textNode1 = document.createTextNode(chat.message);
+            div1.appendChild(textNode1);
+            let div2 = createElement("div",{class: 'messageTimeStamp'});
+            let textNode2 = document.createTextNode(formattedDate);
+            div2.appendChild(textNode2);
+            li.appendChild(div1);
+            li.appendChild(div2);
+            ul.appendChild(li);
+        })
+    }
+    function createElement(element,attributes={}){
+        let el = document.createElement(element);
+        for(let attr in attributes){
+            let tempAttr = document.createAttribute(attr);
+            tempAttr.value = attributes[attr];
+            el.setAttributeNode(tempAttr);
+        }
+        return el;
+    }
+    function submitMessage(event){
+        event.preventDefault();
+        let contentWriter = document.getElementById('contentWriter');
+        let message = contentWriter.innerHTML;
+        let timeStamp = new Date();
+        contentWriter.innerText= '';
+        boom();
+        chatHistory.push({message,timeStamp});
+        // console.log(chatHistory);
+        setMessages();
+    }
+    function boom(){
+        let message = document.getElementById('contentWriter').innerHTML;
+        if(!message.trim()) document.getElementById('contentWriterPlaceHolder').style.setProperty('visibility','visible');
+        else document.getElementById('contentWriterPlaceHolder').style.setProperty('visibility','hidden');
+    }
+</script>

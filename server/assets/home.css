@@ -1,0 +1,116 @@
+form{
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    padding: 10px 0;
+    position: relative;
+}
+
+div .contentWriter{
+    background-color: white;
+    border-radius: 30px;
+    width: 65%;
+    padding: 15px 2%;
+    margin: 0 0 0 5%;
+    font-size: 20px;
+}
+div .contentWriter:focus{
+    outline:0;
+}
+div .contentWriterPlaceHolder{
+    color: #999;
+    position: absolute;
+    left: 7%;
+    top:33%;
+    visibility: visible;
+    font-size: 20px;
+}
+form input{
+    width: 65%;
+    padding: 0 10px;
+    margin: 0 0 0 5%;
+    font-size: 20px;
+}
+form button{
+    width: 20%;
+    margin: 0 2.5% ;
+    color: rgba(255, 255, 255, 0.76);
+    background-color: #f69c3a;
+    font-size: 20px;
+}
+ul {
+    width: 90%;
+    margin: 5%;
+    list-style-type: none;
+    padding: 10px 0;
+    text-align: -webkit-right;
+}
+ul li{
+    background-color: #f69c3a;
+    max-width: 35%;
+    display: flex;
+    flex-direction: row;
+    padding: 8px 12px;
+    margin: 5px 5px 0;
+    border-radius: 8px 0 8px 8px;
+    position: relative;
+}
+ul li:after{
+    position: absolute;
+    content: "";
+    color: #f69c3a;
+    background-color: #f69c3a;
+    right: -10px;
+    top:0px;
+    width: 10px;
+    height: 10px;
+    border-radius: 0 0 20px 0;
+}
+ul li div.messageTimeStamp{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    font-size: 0.82em;
+}
+div.typingBox{
+    position: fixed;
+    width: 90%;
+    margin: auto;
+    bottom: 5%;
+}
+div.main{
+    height: 98%;
+    width: 100%;
+    position: absolute;
+}
+div.topBackgroundStrip{
+    position: fixed;
+    top: 0;
+    height: 20%;
+    width: 100%;
+    background-color: #FF9933;
+    /*background-color: #ee8a0d;*/
+    z-index: -500;
+}
+div.bottomBackgroundStrip{
+    position: fixed;
+    bottom: 0;
+    height: 50%;
+    width: 100%;
+    background-color: #138808;
+    z-index: -500;
+}
+section {
+    background-color: #cdcccc;
+    width: 90%;
+    position: fixed;
+    top: 5%;
+    height: 92%;
+    margin: 0 5%;
+}
+div .messageBox{
+    background-color: #eeeeee;
+    width: 90%;
+    margin: auto;
+    height: 80%;
+}
