@@ -3,20 +3,20 @@ require("babel-core/register");
 require("babel-polyfill");
 const dotEnv = require('dotenv');
 dotEnv.config();
-import MongoDB from './dbs/mongo';
+// import MongoDB from './dbs/mongo';
 
-const mongo = new MongoDB({});
-require('./Users').createUsers();
+// const mongo = new MongoDB({});
+// require('./Users').createUsers();
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const { window } = new JSDOM(`<!DOCTYPE html>`);
 const $ = require('jquery')(window);
-
-import Main from "./main";
+const Main = require('./main').default;
+// import Main from "./main";
 new Main((err)=>{
     console.log('App initialised');
     if(err) console.log("Reported Errors",err);
-})
+});
 
 
 // stack overflow bug resolve
