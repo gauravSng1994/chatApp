@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button ><a href="/downloadCsv">Download csv</a></button>
+</body>
+</html>
+<script>
+    const exportCsv = () => {
+        let formats = ['']
+        let data = [
+            ['Foo', 'programmer'],
+            ['Bar', 'bus driver'],
+            ['Moo', 'Reindeer Hunter']
+        ];
+        let csv = 'Name,Title\n';
+        data.forEach(function(row) {
+            csv += row.join(',');
+            csv += "\n";
+        });
+
+        console.log(csv);
+        let hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = 'people.csv';
+        hiddenElement.click();
+    }
+</script>
