@@ -1,6 +1,5 @@
 const app = require('express')();
 const moment = require('moment');
-const json2csv = require('json2csv').parse;
 const {Parser} = require('json2csv');
 const PORT = 3000;
 app.get('/',(req,res)=>{
